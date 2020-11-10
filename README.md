@@ -12,7 +12,7 @@ A webcam which uses a Raspberry Pi to rotate when your face moves to the periphe
 
 
 
-//OLDER OUTDATED FILE VERSION (RUNS ON JUST WINDOWS)
+//OLDER OUTDATED FILE VERSION (RUNS IN ONE FILE ON DESKTOP)//
 
 Okay, if you want to make this yourself (especially if you're using Windows), here's some tips
 
