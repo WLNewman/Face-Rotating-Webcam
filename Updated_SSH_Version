@@ -1,0 +1,56 @@
+import face_recognition as fr
+import paramiko
+import cv2
+
+#THIS FILE SHOULD BE RAN ON YOUR PC. MAKE SURE YOU HAVE 'rotate.py' ON YOUR PI
+
+FRAME_THICKNESS = 3
+
+encodings = []
+locations = []
+
+#set () to 1 so it would use external webcam
+video_capture = cv2.VideoCapture(0)
+
+
+client = paramiko.SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+try:
+	client.connect('PI'S IP ADDRESS', username='USERNAME', password='PASSWORD') #insert your own IP/username/password
+except:
+	print("youDidn'tLogIntoThePiYouMayWantToTryAgainKThnksBi")
+  
+pseudoFrameCount = 0
+
+while True:
+	ret, frame = video_capture.read()     
+
+	if pseudoFrameCount % 50 == 0:
+
+		locations = fr.face_locations(frame, model='hog')
+		#set hog to cnn if your computer is beefy
+		encodings = fr.face_encodings(frame, locations)
+
+
+		for encoding in range(len(encodings)):
+			#find all faces
+			if locations[encoding][3] < 200:
+				client.exec_command('python rotate.py -1')
+			elif locations[encoding][1] > 500:
+				# rotate(1)
+				client.exec_command('python rotate.py 1')   
+
+
+			center = ((locations[encoding][3]  + locations[encoding][1] )//2, (locations[encoding][0]  + locations[encoding][2] )//2)
+			color = [0, 255, 0]
+			cv2.circle(frame, center, 50, color, FRAME_THICKNESS)
+
+	cv2.imshow('Video', frame)			
+	if cv2.waitKey(1) & 0xFF == ord('q'):
+		break
+
+	pseudoFrameCount += 1
+
+
+video_capture.release()
+cv2.destroyAllWindows()
