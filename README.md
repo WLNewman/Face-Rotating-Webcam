@@ -1,6 +1,19 @@
 # Face-Rotating-Webcam
 A webcam which uses a Raspberry Pi to rotate when your face moves to the peripherals
 
+//WHAT TO INSTALL ON WHAT://
+~Install rotate.py on your raspberry pi and hook up a stepper motor (must be stepper)
+~Install updated SSH on your PC and change the paramiko function which connects
+   to a specific IP Address, username, and password.
+~On your Pi make sure you've authorized SSH under system settings.
+~Follow instructions on wether you are using an internal webcam (0) or external (1)
+    on the videocapture function
+~Have fun
+
+
+
+//OLDER OUTDATED FILE VERSION (RUNS ON JUST WINDOWS)
+
 Okay, if you want to make this yourself (especially if you're using Windows), here's some tips
 
 -face_recognition would never pip install for me. I can't find it again but there's
