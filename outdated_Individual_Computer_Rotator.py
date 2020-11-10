@@ -4,6 +4,9 @@ import face_recognition as fr
 import pigpio
 import cv2
 
+#THIS IS AN OLDER VERSION THAT IS VERY, VERY SLOW. SEE OTHER TWO
+#INCLUDED FILES FOR THE REAL STUFF AND README FOR INSTRUCTION
+
 pi = pigpio.pi('PI IP ADDRESS', 8888)
 if not pi.connected:
 	print('Could not connect to Pi.')
